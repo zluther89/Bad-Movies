@@ -7,7 +7,8 @@ var app = express();
 // https://www.themoviedb.org/account/signup
 
 //Helpers
-var apiHelpers = require("./helpers/apiHelpers.js");
+const { searchWorstMoviesByGenreId } = require("./helpers/apiHelpers");
+const { searchMovieGenres } = require("./helpers/apiHelpers");
 
 //Middleware
 app.use(bodyParser.json());
@@ -38,6 +39,9 @@ Use the routes below to build your application:
 //If you are using OPTION 1, you do not need routes>movieRoutes.js file
 
 app.get("/genres", function(req, res) {
+  searchMovieGenres()
+    .then(apiResponse => res.send(apiResponse.data.genres))
+    .catch(err => console.log(err));
   // make an axios request to get the official list of genres from themoviedb
   // use this endpoint. you will need your API key from signup: https://api.themoviedb.org/3/genre/movie/list
 });
@@ -45,6 +49,10 @@ app.get("/genres", function(req, res) {
 app.get("/search", function(req, res) {
   // use this endpoint to search for movies by genres (using API key): https://api.themoviedb.org/3/discover/movie
   // and sort them by votes (worst first) using the search parameters in themoviedb API
+  searchWorstMoviesByGenreId("28")
+    .then(movies => res.send(movies.data.results))
+    .catch(err => console.log(err));
+
   // do NOT save the results into the database; render results directly on the page
 });
 
