@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var request = require("request");
+var movieDBController = require("./controllers/movieController");
 var app = express();
 
 // Sign up and get your moviedb API key here:
@@ -57,10 +58,26 @@ app.get("/search", function(req, res) {
 });
 
 app.post("/save", function(req, res) {
-  //save movie as favorite into the database
+  let moviename = req.body.moviename;
+  console.log(moviename);
+  movieDBController
+    .saveMovie(moviename)
+    .then(() => res.send(200))
+    .catch(error => res.send("Error duplicate entry"));
+  //save movie as favorite into the database using query
+  //insert favorite into database
 });
 
 app.post("/delete", function(req, res) {
+  let moviename = req.body.moviename;
+  movieDBController
+    .deleteMovie(moviename)
+    .then(() => res.send(200))
+    .catch(error => {
+      console.log(error);
+      res.send("An error occured");
+    });
+  //query db for movie in favorites and delete
   //remove movie from favorites into the database
 });
 

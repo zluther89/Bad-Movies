@@ -8,5 +8,5 @@ USE badmovies;
 
 CREATE TABLE favorites(
     id integer auto_increment PRIMARY KEY,
-    moviename varchar(200)
+    moviename varchar(200) UNIQUE
 );
