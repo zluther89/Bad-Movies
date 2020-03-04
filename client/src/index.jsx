@@ -21,6 +21,10 @@ class App extends React.Component {
     // you might have to do something important here!
   }
 
+  componentDidMount() {
+    this.getMovies("28");
+  }
+
   getMovies(genreID) {
     axios
       .get("/search", {
