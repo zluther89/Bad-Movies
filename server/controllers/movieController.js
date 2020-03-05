@@ -27,8 +27,9 @@ module.exports = {
       `INSERT INTO FAVORITES(title, release_date, vote_average, overview, poster_path) VALUES("${title}", "${release_date}", "${vote_average}", "${overview}", "${poster_path}")`
     );
   },
-  deleteMovie: moviename => {
-    return db.query(`DELETE FROM FAVORITES WHERE moviename='${moviename}'`);
+  deleteMovie: movie => {
+    let { title } = movie;
+    return db.query(`DELETE FROM FAVORITES WHERE title='${title}'`);
   },
 
   returnFavorites: () => {

@@ -47,7 +47,7 @@ app.get("/genres", function(req, res) {
 
 app.get("/search", function(req, res) {
   let genreID = req.query.genreID;
-  console.log(req.query);
+
   searchWorstMoviesByGenreId(genreID)
     .then(movies => res.send(movies.data.results))
     .catch(err => console.log(err));
@@ -57,7 +57,7 @@ app.get("/search", function(req, res) {
 
 app.post("/save", function(req, res) {
   let movie = req.body;
-  console.log(movie);
+
   movieDBController
     .saveMovie(movie)
     .then(() => res.send(200))
@@ -77,10 +77,12 @@ app.post("/favorites", function(req, res) {
     });
 });
 
-app.post("/delete", function(req, res) {
-  let moviename = req.body.moviename;
+app.delete("/delete", function(req, res) {
+  let movie = req.body;
+
+  console.log("movie", movie);
   movieDBController
-    .deleteMovie(moviename)
+    .deleteMovie(movie)
     .then(() => res.send(200))
     .catch(error => {
       console.log(error);
