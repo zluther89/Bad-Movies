@@ -21,11 +21,30 @@ module.exports = {
     // send back
   },
 
-  saveMovie: moviename => {
+  saveMovie: movie => {
     console.log("here");
-    return db.query(`INSERT INTO FAVORITES(moviename) VALUES("${moviename}")`);
+    let { title, release_date, vote_average, poster_path } = movie;
+    console.log("title", title);
+    return db.query(
+      `INSERT INTO FAVORITES(title, release_date, vote_average, poster_path) VALUES("${title}", "${release_date}", "${vote_average}", "${poster_path}")`
+    );
   },
   deleteMovie: moviename => {
     return db.query(`DELETE FROM FAVORITES WHERE moviename='${moviename}'`);
   }
 };
+
+// popularity: 1.72
+// id: 460571
+// video: false
+// vote_count: 5
+// vote_average: 0
+// title: "That Good Night"
+// release_date: "2018-05-05"
+// original_language: "en"
+// original_title: "That Good Night"
+// genre_ids: [18]
+// backdrop_path: "/r3advwquUpxSSVysAl2tUW0M0MM.jpg"
+// adult: false
+// overview: "A moving and memorable family drama about a terminally ill writer who wants to be reconciled with his long-abandoned son."
+// poster_path: "/4URg3uF4wI2kikL9CYgBRApEU6A.jpg"

@@ -56,12 +56,15 @@ app.get("/search", function(req, res) {
 });
 
 app.post("/save", function(req, res) {
-  let moviename = req.body.moviename;
-  console.log(moviename);
+  let movie = req.body;
+  console.log(movie);
   movieDBController
-    .saveMovie(moviename)
+    .saveMovie(movie)
     .then(() => res.send(200))
-    .catch(error => res.send("Error duplicate entry"));
+    .catch(error => {
+      console.log(error);
+      res.send("Error duplicate entry");
+    });
 });
 
 app.post("/delete", function(req, res) {
