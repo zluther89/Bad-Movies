@@ -67,8 +67,10 @@ class App extends React.Component {
 
   swapFavorites() {
     //dont touch
-    this.setState({
-      showFaves: !this.state.showFaves
+    this.getFavorites().then(() => {
+      this.setState({
+        showFaves: !this.state.showFaves
+      });
     });
   }
 

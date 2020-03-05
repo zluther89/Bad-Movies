@@ -22,11 +22,9 @@ module.exports = {
   },
 
   saveMovie: movie => {
-    console.log("here");
-    let { title, release_date, vote_average, poster_path } = movie;
-    console.log("title", title);
+    let { title, release_date, vote_average, overview, poster_path } = movie;
     return db.query(
-      `INSERT INTO FAVORITES(title, release_date, vote_average, poster_path) VALUES("${title}", "${release_date}", "${vote_average}", "${poster_path}")`
+      `INSERT INTO FAVORITES(title, release_date, vote_average, overview, poster_path) VALUES("${title}", "${release_date}", "${vote_average}", "${overview}", "${poster_path}")`
     );
   },
   deleteMovie: moviename => {
