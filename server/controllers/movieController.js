@@ -31,6 +31,10 @@ module.exports = {
   },
   deleteMovie: moviename => {
     return db.query(`DELETE FROM FAVORITES WHERE moviename='${moviename}'`);
+  },
+
+  returnFavorites: () => {
+    return db.query(`SELECT * FROM favorites`);
   }
 };
 

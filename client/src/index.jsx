@@ -17,12 +17,14 @@ class App extends React.Component {
     this.getMovies = this.getMovies.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
     this.deleteMovie = this.deleteMovie.bind(this);
+    this.swapFavorites = this.swapFavorites.bind(this);
 
     // you might have to do something important here!
   }
 
   componentDidMount() {
     this.getMovies("28");
+    this.getFavorites().then(() => console.log(this.state.favorites));
   }
 
   getMovies(genreID) {
@@ -39,12 +41,28 @@ class App extends React.Component {
     // make an axios request to your server on the GET SEARCH endpoint
   }
 
-  saveMovie() {
+  saveMovie(movie) {
+    console.log("saved");
+    axios
+      .post("/save", movie)
+      .then(() => console.log("saved movie to favorites"))
+      .catch(err => console.log(err));
     // same as above but do something diff
   }
 
   deleteMovie() {
     // same as above but do something diff
+  }
+
+  getFavorites() {
+    return axios
+      .post("/favorites")
+      .then(res => {
+        console.log("favorties", res.data);
+        this.setState({ favorites: res.data });
+        console.log("state favorites", this.state.favorites);
+      })
+      .catch(err => console.log(err));
   }
 
   swapFavorites() {
@@ -72,6 +90,7 @@ class App extends React.Component {
               this.state.showFaves ? this.state.favorites : this.state.movies
             }
             showFaves={this.state.showFaves}
+            save={this.saveMovie}
           />
         </div>
       </div>

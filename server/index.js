@@ -67,6 +67,16 @@ app.post("/save", function(req, res) {
     });
 });
 
+app.post("/favorites", function(req, res) {
+  movieDBController
+    .returnFavorites()
+    .then(movies => res.send(movies))
+    .catch(err => {
+      console.log(err);
+      res.send("error");
+    });
+});
+
 app.post("/delete", function(req, res) {
   let moviename = req.body.moviename;
   movieDBController

@@ -22,7 +22,7 @@ class Movies extends React.Component {
 
           //let movieOverview = movie.overview.slice(0, 20);
           return (
-            <li className="movie_item">
+            <li className="movie_item" onClick={() => this.props.save(movie)}>
               <img src={movieUrl} />
               <div className="movie_description">
                 <h2>{movie.overview}</h2>
