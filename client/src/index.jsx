@@ -43,6 +43,8 @@ class App extends React.Component {
 
   saveMovie(movie) {
     console.log("saved");
+
+    //note.... return as promise?
     axios
       .post("/save", movie)
       .then(() => console.log("saved movie to favorites"))
@@ -50,8 +52,15 @@ class App extends React.Component {
     // same as above but do something diff
   }
 
-  deleteMovie() {
-    // same as above but do something diff
+  deleteMovie(movie) {
+    console.log("deletemovie");
+    console.log(movie);
+
+    axios
+      .delete("/delete", { data: movie })
+      .then(() => console.log("deleted movie from db"))
+      .catch(err => console.log(err))
+      .then(() => this.getFavorites());
   }
 
   getFavorites() {
@@ -91,6 +100,7 @@ class App extends React.Component {
             movies={
               this.state.showFaves ? this.state.favorites : this.state.movies
             }
+            handler={this.state.showFaves ? this.deleteMovie : this.saveMovie}
             showFaves={this.state.showFaves}
             save={this.saveMovie}
           />

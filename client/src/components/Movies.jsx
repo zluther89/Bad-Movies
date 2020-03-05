@@ -21,8 +21,12 @@ class Movies extends React.Component {
           movieUrl = movie.poster_path === null ? defaultImageUrl : movieUrl;
 
           //let movieOverview = movie.overview.slice(0, 20);
+          //onclick switches between save and delete depending on whether the previous showfavorite state is false or true
           return (
-            <li className="movie_item" onClick={() => this.props.save(movie)}>
+            <li
+              className="movie_item"
+              onClick={() => this.props.handler(movie)}
+            >
               <img src={movieUrl} />
               <div className="movie_description">
                 <h2>{movie.overview}</h2>
