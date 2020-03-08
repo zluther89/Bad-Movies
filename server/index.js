@@ -10,6 +10,8 @@ var app = express();
 var apiHelpers = require("./helpers/apiHelpers.js");
 
 //Middleware
+
+//new branch test
 app.use(bodyParser.json());
 
 // Due to express, when you load the page, it doesn't make a get request to '/', it simply serves up the dist folder
